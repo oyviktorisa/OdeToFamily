@@ -12,7 +12,7 @@ namespace OdeToFamily.Core
         public int Id { get; set; }
         [Required, StringLength(255)]
         public string Name { get; set; }
-        [Required, StringLength(16)]
+        [Required, StringLength(16), MinLength(16)]
         public string NIK { get; set; }
         public GenderType Gender { get; set; }
     }

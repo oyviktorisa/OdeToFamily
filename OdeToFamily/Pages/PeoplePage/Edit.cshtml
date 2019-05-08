@@ -1,0 +1,29 @@
+﻿@page "{peopleId:int?}"
+@model OdeToFamily.Pages.PeoplePage.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="PeopleEntity.Id" />
+    <div class="form-group">
+        <label asp-for="PeopleEntity.Name"></label>
+        <input asp-for="PeopleEntity.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="PeopleEntity.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PeopleEntity.NIK"></label>
+        <input asp-for="PeopleEntity.NIK" class="form-control" />
+        <span class="text-danger" asp-validation-for="PeopleEntity.NIK"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PeopleEntity.Gender"></label>
+        <select class="form-control" asp-for="PeopleEntity.Gender"
+                asp-items="Model.Genders">
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
