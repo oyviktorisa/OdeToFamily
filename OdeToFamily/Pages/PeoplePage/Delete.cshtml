@@ -1,0 +1,13 @@
+﻿@page
+@model OdeToFamily.Pages.PeoplePage.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+<div>Are you sure want to delete @Model.PeopleEntity.Name ?</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page=".\List" class="btn btn-default">Cancel</a>
+</form>
+

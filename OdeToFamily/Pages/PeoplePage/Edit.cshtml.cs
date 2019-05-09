@@ -28,6 +28,10 @@ namespace OdeToFamily.Pages.PeoplePage
         public IActionResult OnGet(int? peopleId)
         {
             Genders = htmlHelper.GetEnumSelectList<GenderType>();
+            if(peopleId.HasValue)
+            {
+                PeopleEntity = peopleData.GetById(peopleId.Value);
+            }
             return Page();
         }
 

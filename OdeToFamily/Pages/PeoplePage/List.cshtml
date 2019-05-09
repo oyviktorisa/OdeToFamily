@@ -12,6 +12,14 @@
             <td>@people.Name</td>
             <td>@people.NIK</td>
             <td>@people.Gender</td>
+            <td>
+                <a class="btn btn-lg" asp-page=".\Detail" asp-route-peopleId="@people.Id" />
+                <i class="glyphicon glyphicon-zoom-in"></i>
+                <a class="btn btn-lg" asp-page=".\Edit" asp-route-peopleId="@people.Id" />
+                <i class="glyphicon glyphicon-pencil"></i>
+                <a class="btn btn-lg" asp-page=".\Delete" asp-route-peopleId="@people.Id" />
+                <i class="glyphicon glyphicon-trash"></i>
+            </td>
         </tr>
     }
 </table>

@@ -1,0 +1,19 @@
+﻿@page "{peopleId:int}"
+@model OdeToFamily.Pages.PeoplePage.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>
+    Name : @Model.PeopleEntity.Name
+</div>
+<div>
+    NIK : @Model.PeopleEntity.NIK
+</div>
+<div>
+    Gender : @Model.PeopleEntity.Gender
+</div>
+
+<a asp-page=".\List" class="btn bg-primary">See All People</a>
