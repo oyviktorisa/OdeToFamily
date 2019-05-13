@@ -31,6 +31,7 @@ namespace OdeToFamily
                     .BuildServiceProvider();
 
             services.AddScoped<IPeopleData, SqlPeopleData>();
+            services.AddScoped<IRelationsData, SqlRelationsData>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

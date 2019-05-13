@@ -11,18 +11,28 @@ namespace OdeToFamily.Pages.PeoplePage
 {
     public class DetailModel : PageModel
     {
-        private readonly IPeopleData PeopleData;
+        private readonly IPeopleData peopleData;
+        private readonly IRelationsData relationsData;
 
         public People PeopleEntity { get; set; }
         public IEnumerable<Relations> RelationsList { get; set; }
 
-        public DetailModel(IPeopleData peopleData)
+        public DetailModel(IPeopleData peopleData,
+                           IRelationsData relationsData)
         {
-            this.PeopleData = peopleData;
+            this.peopleData = peopleData;
+            this.relationsData = relationsData;
         }
         public void OnGet(int peopleId)
         {
-            PeopleEntity = PeopleData.GetById(peopleId);
+            PeopleEntity = peopleData.GetById(peopleId);
+            RelationsList = relationsData.GetByPeopleId(peopleId);
+
+            foreach(var relations in RelationsList)
+            {
+                relations.People = peopleData.GetById(relations.PeopleId);
+                relations.PeopleRelateTo = peopleData.GetById(relations.PeopleRelateToId);
+            }
         }
     }
 }

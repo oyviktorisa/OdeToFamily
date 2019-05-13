@@ -16,4 +16,13 @@
     Gender : @Model.PeopleEntity.Gender
 </div>
 
+<h3>Relatives</h3>
+@foreach(var relation in Model.RelationsList)
+{
+    <div>
+        @relation.PeopleRelateTo.Name is @relation.Relation to @relation.People.Name
+    </div>
+}
+
 <a asp-page=".\List" class="btn bg-primary">See All People</a>
+<a asp-page="..\RelationPage\Edit" asp-route-peopleId="@Model.PeopleEntity.Id" class="btn bg-primary">Add relation</a>

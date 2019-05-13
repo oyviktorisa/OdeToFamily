@@ -9,6 +9,7 @@ namespace OdeToFamily.Data
     {
         IEnumerable<People> GetAll();
         People GetById(int id);
+        IEnumerable<People> GetByName(string name);
         People AddPeople(People people);
         People UpdatePeople(People people);
         People DeletePeople(int id);

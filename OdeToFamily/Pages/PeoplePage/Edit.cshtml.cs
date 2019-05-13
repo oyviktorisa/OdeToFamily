@@ -31,6 +31,10 @@ namespace OdeToFamily.Pages.PeoplePage
             if(peopleId.HasValue)
             {
                 PeopleEntity = peopleData.GetById(peopleId.Value);
+            } else
+            {
+                PeopleEntity = new People();
+                PeopleEntity.Gender = 0;
             }
             return Page();
         }
@@ -40,7 +44,14 @@ namespace OdeToFamily.Pages.PeoplePage
             Genders = htmlHelper.GetEnumSelectList<GenderType>();
             if (ModelState.IsValid)
             {
-                peopleData.AddPeople(PeopleEntity);
+                if (PeopleEntity.Id > 0)
+                {
+                    peopleData.UpdatePeople(PeopleEntity);
+                }
+                else
+                {
+                    peopleData.AddPeople(PeopleEntity);
+                }
                 peopleData.Commit();
                 return RedirectToPage("./List");
             }

@@ -8,5 +8,11 @@ namespace OdeToFamily.Data
     public interface IRelationsData
     {
         IEnumerable<Relations> GetAll();
+        Relations GetById(int id);
+        IEnumerable<Relations> GetByPeopleId(int peopleId);
+        Relations AddRelation(Relations relation);
+        Relations UpdateRelation(Relations relation);
+        Relations DeleteRelation(int id);
+        int Commit();
     }
 }

@@ -57,5 +57,15 @@ namespace OdeToFamily.Data
 
             return people;
         }
+
+        IEnumerable<People> IPeopleData.GetByName(string name)
+        {
+            var query = from p in dbContext.People
+                        where p.Name.ToLower().Contains(name.ToLower()) || string.IsNullOrEmpty(name)
+                        orderby p.Name
+                        select p;
+
+            return query;
+        }
     }
 }

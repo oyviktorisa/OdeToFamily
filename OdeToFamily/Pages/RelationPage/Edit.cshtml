@@ -1,0 +1,50 @@
+﻿@page "{peopleId:int}"
+@model OdeToFamily.Pages.RelationPage.EditModel
+@{
+}
+
+<h2>Edit Relation</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="RelationEntity.Id" />
+    <input type="hidden" asp-for="RelationEntity.PeopleId" />
+    <div class="form-group">
+        <label asp-for="RelationEntity.PeopleRelateToId">People Relate To</label>
+        <input type="hidden" asp-for="RelationEntity.PeopleRelateToId" id="PeopleRelateToId" />
+        <input type="text" id="SelectedPeople" value="" class="form-control" />
+        <span class="text-danger" asp-validation-for="RelationEntity.PeopleRelateToId"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RelationEntity.Relation"></label>
+        <select class="form-control" asp-for="RelationEntity.Relation"
+                asp-items="Model.RelationTypes"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#SelectedPeople').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/api/People/search?name=" + request.term, type: "GET",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.name, value: item.id };
+                            }))
+                        }
+                    })
+                },
+                select: function (event, ui) {
+                    $("#PeopleRelateToId").val(ui.item.value);
+                    $("#SelectedPeople").val(ui.item.label);
+                    return false;
+                }
+            })
+        })
+    </script>
+}
