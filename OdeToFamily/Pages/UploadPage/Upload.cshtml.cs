@@ -12,19 +12,23 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using OdeToFamily.Core;
+using OdeToFamily.Data;
 
 namespace OdeToFamily.Pages.UploadPage
 {
     public class UploadModel : PageModel
     {
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IPeopleData peopleData;
 
         [BindProperty]
         public List<People> PeopleList { get; set; }
 
-        public UploadModel(IHostingEnvironment hostingEnvironment)
+        public UploadModel(IHostingEnvironment hostingEnvironment,
+                           IPeopleData peopleData)
         {
             _hostingEnvironment = hostingEnvironment;
+            this.peopleData = peopleData;
         }
 
         public void OnGet()
@@ -75,10 +79,20 @@ namespace OdeToFamily.Pages.UploadPage
                 }
             }
 
-            var model = new UploadModel(_hostingEnvironment);
+            var model = new UploadModel(_hostingEnvironment, peopleData);
             model.PeopleList = PeopleList;
 
             return PartialView("_Preview", model);
+        }
+
+        public IActionResult OnPostSave()
+        {
+            foreach(var people in PeopleList)
+            {
+                peopleData.AddPeople(people);
+            }
+            peopleData.Commit();
+            return RedirectToPage("../PeoplePage/List");
         }
 
         [NonAction]

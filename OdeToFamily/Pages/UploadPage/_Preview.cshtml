@@ -1,13 +1,25 @@
 ﻿@using OdeToFamily.Core
 @model UploadModel
 
-    <table class="table-bordered">
-        @foreach (var people in Model.PeopleList)
-        {
+    <form method="post" asp-page-handler="Save">
+        <table class="table-bordered">
+            @for (int i = 0; i < Model.PeopleList.Count; i++)
+            {
             <tr>
-                <td>@people.Name</td>
-                <td>@people.NIK</td>
-                <td>@people.Gender</td>
+                <td>
+                    @Model.PeopleList[i].Name
+                    @Html.HiddenFor(it => Model.PeopleList[i].Name)
+                </td>
+                <td>
+                    @Model.PeopleList[i].NIK
+                    @Html.HiddenFor(it => Model.PeopleList[i].NIK)
+                </td>
+                <td>
+                    @Model.PeopleList[i].Gender
+                    @Html.HiddenFor(it => Model.PeopleList[i].Gender)
+                </td>
             </tr>
-        }
-    </table>
+            }
+        </table>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
